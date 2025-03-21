@@ -5,8 +5,8 @@ from discord.ext import commands
 from datetime import datetime, timedelta
 
 # Load environment variables
-DISCORD_TOKEN = "your-discord-bot-token"
-OPENAI_API_KEY = "your-openai-api-key"
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Set up OpenAI API
 openai.api_key = OPENAI_API_KEY
