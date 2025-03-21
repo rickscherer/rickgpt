@@ -37,9 +37,9 @@ async def summarize(interaction: discord.Interaction):
 
     # ✅ Updated OpenAI API call
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "Summarize the following Discord conversation."},
+            {"role": "system", "content": "Summarize the following Discord conversation, provide me with a bullet point list highlighting the top topics."},
             {"role": "user", "content": text}
         ]
     )
