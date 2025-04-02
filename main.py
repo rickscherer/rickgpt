@@ -21,8 +21,10 @@ tree = bot.tree  # Slash command tree
 
 @tree.command(name="summarize", description="Summarizes the last 24 hours of messages in this channel")
 async def summarize(interaction: discord.Interaction):
+    await interaction.response.defer()  # Acknowledge the interaction
+
     channel = interaction.channel
-    now = datetime.now(UTC)  # ✅ Fixed UTC time handling
+    now = datetime.now(UTC)
     yesterday = now - timedelta(days=1)
 
     messages = []
@@ -30,23 +32,23 @@ async def summarize(interaction: discord.Interaction):
         messages.append(f"{message.author.name}: {message.content}")
 
     if not messages:
-        await interaction.response.send_message("No messages from the past 24 hours to summarize.", ephemeral=True)
+        await interaction.followup.send("No messages from the past 24 hours to summarize.")
         return
 
     text = "\n".join(messages)
 
-    # ✅ Updated OpenAI API call
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "Summarize the following Discord conversation provide me with a bullet point list highlighting the top topics."},
+            {"role": "system", "content": "Summarize the following Discord conversation in a bullet-point list highlighting key topics."},
             {"role": "user", "content": text}
         ]
     )
 
     summary = response.choices[0].message.content
 
-    await interaction.response.send_message(f"**Summary of the last 24 hours:**\n{summary}")
+    await interaction.followup.send(f"**Summary of the last 24 hours:**\n{summary}")  # Use followup instead
+
 
 @bot.event
 async def on_ready():
