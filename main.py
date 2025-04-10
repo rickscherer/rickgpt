@@ -7,6 +7,8 @@ import asyncio
 # Load environment variables
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+GUILD_ID = os.getenv("GUILD_ID")  # Optional: set this if you're using a dev server
+guild_ids = [int(gid.strip()) for gid in GUILD_IDS.split(",")] if GUILD_IDS else []
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -17,12 +19,18 @@ bot = commands.Bot(command_prefix="/", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
+    print(f"✅ Logged in as {bot.user} ({bot.user.id})")
+
     try:
-        await bot.tree.sync()
-        print(f"Synced slash commands.")
+        if guild_ids:
+            for gid in guild_ids:
+                synced = await bot.tree.sync(guild=discord.Object(id=gid))
+                print(f"🔁 Synced {len(synced)} commands to guild {gid}")
+        else:
+            synced = await bot.tree.sync()
+            print(f"🌐 Synced {len(synced)} global commands")
     except Exception as e:
-        print(f"Error syncing commands: {e}")
+        print(f"❌ Error syncing commands: {e}")
 
 async def main():
     initial_extensions = [
