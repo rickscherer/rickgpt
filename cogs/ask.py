@@ -4,7 +4,7 @@ from discord import app_commands, ui
 import openai
 import os
 
-class ChatGPTModal(ui.Modal, title="Ask ChatGPT"):
+class ChatGPTModal(ui.Modal, title="Ask RickGPT"):
     prompt = ui.TextInput(
         label="Enter your prompt",
         style=discord.TextStyle.paragraph,
