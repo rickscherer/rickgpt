@@ -8,6 +8,8 @@ import os
 class Summarize(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        print(f"🔑 Registered commands: {[cmd.name for cmd in self.bot.tree.get_commands()]}")
+
         self.client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     @app_commands.command(name="summarize", description="Summarizes messages from the past X hours")
