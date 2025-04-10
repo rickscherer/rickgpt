@@ -21,15 +21,26 @@ class ChatGPTModal(ui.Modal, title="Ask ChatGPT"):
     async def on_submit(self, interaction: discord.Interaction):
         await interaction.response.defer(thinking=True)
 
+        # Capture the prompt value from the modal
+        user_prompt = self.prompt.value
+
         try:
+            # Send the user prompt to ChatGPT for processing
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "user", "content": self.prompt.value}
+                    {"role": "user", "content": user_prompt}
                 ]
             )
+
+            # Get the response from ChatGPT
             answer = response.choices[0].message.content
-            await interaction.followup.send(f"**Response:**\n{answer}")
+
+            # Send both the question and the response
+            await interaction.followup.send(
+                f"**Question:**\n{user_prompt}\n\n**Response:**\n{answer}"
+            )
+
         except Exception as e:
             await interaction.followup.send(f"Something went wrong: {e}")
 
