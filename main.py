@@ -2,11 +2,11 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
+import asyncio
 
 # Load environment variables
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -24,13 +24,16 @@ async def on_ready():
     except Exception as e:
         print(f"Error syncing commands: {e}")
 
-# Load cogs
-initial_extensions = [
-    "cogs.summarize",
-    "cogs.ask"
-]
+async def main():
+    initial_extensions = [
+        "cogs.summarize",
+        "cogs.ask"
+    ]
 
-for ext in initial_extensions:
-    bot.load_extension(ext)
+    for ext in initial_extensions:
+        await bot.load_extension(ext)
 
-bot.run(DISCORD_TOKEN)
+    await bot.start(DISCORD_TOKEN)
+
+if __name__ == "__main__":
+    asyncio.run(main())
