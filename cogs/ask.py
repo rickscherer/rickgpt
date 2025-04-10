@@ -33,7 +33,7 @@ class ChatGPTModal(ui.Modal, title="Ask ChatGPT"):
         except Exception as e:
             await interaction.followup.send(f"Something went wrong: {e}")
 
-class Ask(commands.Cog):
+class AskCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         print(f"🔑 Registered commands: {[cmd.name for cmd in self.bot.tree.get_commands()]}")
@@ -43,4 +43,4 @@ class Ask(commands.Cog):
         await interaction.response.send_modal(ChatGPTModal(interaction))
 
 async def setup(bot):
-    await bot.add_cog(Ask(bot))
+    await bot.add_cog(AskCog(bot))
