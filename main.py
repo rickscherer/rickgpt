@@ -21,6 +21,8 @@ bot = commands.Bot(command_prefix="/", intents=intents)
 async def on_ready():
     print(f"✅ Logged in as {bot.user} ({bot.user.id})")
 
+    print(f"🌍 Loaded cogs: {[cog for cog in bot.cogs]}")
+    
     print(f"🌍 Registered commands: {[command.name for command in bot.tree.get_commands()]}")
 
     try:
