@@ -7,7 +7,7 @@ import asyncio
 # Load environment variables
 load_dotenv()
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-GUILD_ID = os.getenv("GUILD_ID")  # Optional: set this if you're using a dev server
+GUILD_IDS = os.getenv("GUILD_IDS")
 guild_ids = [int(gid.strip()) for gid in GUILD_IDS.split(",")] if GUILD_IDS else []
 
 intents = discord.Intents.default()
