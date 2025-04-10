@@ -36,6 +36,7 @@ class ChatGPTModal(ui.Modal, title="Ask ChatGPT"):
 class AskCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        print("AskCog loaded")
         print(f"🔑 Registered commands: {[cmd.name for cmd in self.bot.tree.get_commands()]}")
     
     @app_commands.command(name="ask", description="Ask ChatGPT something")
