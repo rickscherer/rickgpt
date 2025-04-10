@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, UTC
 import openai
 import os
 
-class Summarize(commands.Cog):
+class SummarizeCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         print(f"🔑 Registered commands: {[cmd.name for cmd in self.bot.tree.get_commands()]}")
@@ -46,4 +46,4 @@ class Summarize(commands.Cog):
         await interaction.followup.send(f"**Summary of the last {hours} hours:**\n{summary}")
 
 async def setup(bot):
-    await bot.add_cog(Summarize(bot))
+    await bot.add_cog(SummarizeCog(bot))
