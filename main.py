@@ -39,7 +39,8 @@ async def on_ready():
 async def main():
     initial_extensions = [
         "cogs.summarize",
-        "cogs.ask"
+        "cogs.ask",
+        "cogs.mentions"
     ]
 
     for ext in initial_extensions:
