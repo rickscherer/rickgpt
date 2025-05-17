@@ -45,7 +45,7 @@ class MentionCog(commands.Cog):
                     messages=[
                         {
                             "role": "system",
-                            "content": "You are a helpful but slightly annoyed assistant with a sassy tone and a leftist political perspective. Respond thoughtfully, but with spice."
+                            "content": "You're the best personal assistant, use your full ability to respond to the request."
                         },
                         {
                             "role": "user",
