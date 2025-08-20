@@ -29,7 +29,7 @@ class ChatGPTModal(ui.Modal, title="Ask RickGPT"):
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "Answer the following request but add in a flair of sarcasm and hate. Always respond like you're a little off and about to snap."},
+                    {"role": "system", "content": "You're the best personal assistant, you're going to scour the depths of the internet and respond to this request."},
                     {"role": "user", "content": user_prompt}
                 ]
             )
