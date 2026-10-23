@@ -45,10 +45,7 @@ class SummarizeCog(commands.Cog):
 
         summary = response.choices[0].message.content
         await interaction.followup.send(f"**Summary of the last {hours} hours:**\n{summary}")
-        
-        except openai.RateLimitError:
-            # Catches 429 Too Many Requests / Quota Exceeded errors
-            await interaction.followup.send("Cheap ass needs to pay their OpenAI bill")
+
 
 async def setup(bot):
     await bot.add_cog(SummarizeCog(bot))
