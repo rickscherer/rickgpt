@@ -27,7 +27,7 @@ class ChatGPTModal(ui.Modal, title="Ask RickGPT"):
         try:
             # Send the user prompt to ChatGPT for processing
             response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You're the best personal assistant, you're going to scour the depths of the internet and respond to this request."},
                     {"role": "user", "content": user_prompt}
