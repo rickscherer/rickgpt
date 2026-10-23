@@ -42,6 +42,10 @@ class ChatGPTModal(ui.Modal, title="Ask RickGPT"):
                 f"**Question:**\n{user_prompt}\n\n**Response:**\n{answer}"
             )
 
+        except openai.RateLimitError:
+            # Catches 429 Too Many Requests / Quota Exceeded errors
+            await interaction.followup.send("Cheap ass needs to pay their OpenAI bill")
+
         except Exception as e:
             await interaction.followup.send(f"Something went wrong: {e}")
 
