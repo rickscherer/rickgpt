@@ -25,6 +25,7 @@ class SummarizeCog(commands.Cog):
         lookback_time = now - timedelta(hours=hours)
 
         messages = []
+        
         async for message in channel.history(limit=1000, after=lookback_time):
             messages.append(f"{message.author.name}: {message.content}")
 
@@ -44,6 +45,10 @@ class SummarizeCog(commands.Cog):
 
         summary = response.choices[0].message.content
         await interaction.followup.send(f"**Summary of the last {hours} hours:**\n{summary}")
+        
+        except openai.RateLimitError:
+            # Catches 429 Too Many Requests / Quota Exceeded errors
+            await interaction.followup.send("Cheap ass needs to pay their OpenAI bill")
 
 async def setup(bot):
     await bot.add_cog(SummarizeCog(bot))
