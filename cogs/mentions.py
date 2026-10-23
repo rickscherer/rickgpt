@@ -55,10 +55,6 @@ class MentionCog(commands.Cog):
                 )
                 answer = response.choices[0].message.content
                 await channel.send(f"**You asked:** {prompt or '[Just mentioned me 🤨]'}\n**RickGPT says:** {answer}")
-
-            except openai.RateLimitError:
-            # Catches 429 Too Many Requests / Quota Exceeded errors
-            await interaction.followup.send("Cheap ass needs to pay their OpenAI bill")
             
             except Exception as e:
                 await channel.send(f"Ugh. Something broke: {e}")
