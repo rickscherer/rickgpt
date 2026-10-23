@@ -35,7 +35,7 @@ class SummarizeCog(commands.Cog):
         text = "\n".join(messages)
 
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "Summarize the following Discord conversation and it will be the most epic read ever. Bulletize the summary, making it easier to read and consume."},
                 {"role": "user", "content": text}
